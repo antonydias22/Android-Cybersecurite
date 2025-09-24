@@ -23,7 +23,7 @@
 Invoke-WebRequest -Uri "https://application-client-nickel.firebaseio.com/.json" -Method GET
 ```
 
-**📸 Capture de la Réponse**:
+**Capture de la Réponse**:
 
 ```json
 {
@@ -42,7 +42,7 @@ foreach($endpoint in $endpoints) {
 }
 ```
 
-**📸 Capture des Réponses**:
+**Capture des Réponses**:
 
 ```
 PROTECTED: /.json - Le serveur distant a retourné une erreur : (401) Non autorisé.
@@ -63,7 +63,7 @@ foreach($method in $methods) {
 }
 ```
 
-**📸 Capture des Réponses**:
+**Capture des Réponses**:
 
 ```
 PROTECTED: GET - Status: Unauthorized
@@ -80,7 +80,7 @@ PROTECTED: DELETE - Status: Unauthorized
 Invoke-RestMethod -Uri "https://application-client-nickel.firebaseio.com/.json?shallow=true" -Method GET
 ```
 
-**📸 Capture de la Réponse**:
+**Capture de la Réponse**:
 
 ```
 PROTECTED shallow query - Status: Unauthorized
