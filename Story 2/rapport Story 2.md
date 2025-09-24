@@ -15,11 +15,13 @@
   [android:usesCleartextTraffic=true] (Critique) - L'application est configurée pour utiliser du trafic réseau non chiffré, comme HTTP en clair, FTP, DownloadManager et MediaPlayer. La valeur par défaut pour les applications ciblant l'API 27 ou inférieure est "true", tandis que les applications ciblant l'API 28 ou supérieure ont une valeur par défaut de "false". L'utilisation de trafic en clair présente des risques majeurs : absence de confidentialité, d'authenticité et de protection contre les manipulations. Un attaquant sur le réseau peut intercepter les données transmises et les modifier sans être détecté.
 
 - **Utilisation d'un mode de chiffrement vulnérable**
-  L'application utilise le mode de chiffrement CBC avec le padding PKCS5/PKCS7. Cette configuration est vulnérable aux attaques par oracle de padding. 
+  L'application utilise le mode de chiffrement CBC avec le padding PKCS5/PKCS7. Cette configuration est vulnérable aux attaques par oracle de padding.
+
   - Référence CWE: CWE-649: Dépendance à l'obscurcissement ou au chiffrement des entrées liées à la sécurité sans vérification d'intégrité
   - OWASP Top 10: M5: Cryptographie insuffisante
   - OWASP MASVS: MSTG-CRYPTO-3
-  
+
   Fichiers concernés:
+
   - com/oblador/keychain/cipherStorage/CipherStorageKeystoreAESCBC.java
   - com/pushwoosh/internal/a/a.java
