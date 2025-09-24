@@ -1,5 +1,3 @@
-# Analyse strings.xml - Findings US5
-
 ## User Story 5: Analyse de strings.xml
 
 **EN TANT que** analyste sécurité  
