@@ -1,5 +1,7 @@
 En tant que ingénieure Sécurité
+
 ## Je veux décompliler le bytecode de mon apk
+
 ## afin de touver vunérabilité logique ou mauvaise pratiques
 
 DoD : code_findings.md avec explication pour chaque extrait
@@ -44,22 +46,26 @@ Comment ça fonctionne:
     Contournement potentiel des mécanismes d'authentification
     Compromission de la sécurité de l'application et des données utilisateur
 
-Vulnérabilité 3: Utilisation d'un générateur de nombres aléatoires non sécurisé
-Gravité: Moyenne (mais critique pour la sécurité cryptographique)
+Vulnérabilité 3: Injection SQL dans les requêtes brutes et stockage non sécurisé
+Gravité: Élevée
 Description simple:
-L'application utilise un générateur de nombres aléatoires non sécurisé. Les nombres générés peuvent être prévisibles, ce qui compromet toutes les fonctionnalités de sécurité qui en dépendent, comme la génération de clés, de tokens ou de valeurs d'authentification.
+L'application utilise des requêtes SQL brutes avec des entrées utilisateur non filtrées, ce qui peut conduire à des injections SQL. De plus, les informations sensibles sont stockées dans la base de données sans chiffrement approprié.
 Comment ça fonctionne:
 
-1. L'application utilise probablement java.util.Random au lieu de java.security.SecureRandom
-2. Les générateurs non sécurisés produisent des séquences prévisibles
-3. Un attaquant peut prédire les "nombres aléatoires" générés
-4. Cela permet de deviner des tokens de session, des clés temporaires ou d'autres valeurs censées être aléatoires
-   Fichiers concernés:
-   com/pushwoosh/internal/a/d.java
-   com/pushwoosh/q.java
-   Impact:
+1.  L'application exécute des requêtes SQL brutes sans paramétrage adéquat
+2.  Les entrées utilisateur sont directement concaténées dans les requêtes SQL
+3.  Un attaquant peut injecter du code SQL malveillant pour manipuler la base de données
+4.  Les données sensibles sont stockées en clair, sans chiffrement, dans la base SQLite
+    Fichiers concernés:
+    com/pushwoosh/inapp/f/b.java
+    com/pushwoosh/inbox/e/b/b.java
+    com/pushwoosh/internal/network/f.java
+    com/pushwoosh/repository/LockScreenMediaStorageImpl.java
+    com/pushwoosh/repository/PushBundleStorageImpl.java
+    com/pushwoosh/repository/c.java
 
-- Prédictibilité des valeurs supposées aléatoires
-- Compromission des mécanismes de sécurité basés sur l'aléatoire
-- Possibilité de deviner des tokens d'authentification
-- Affaiblissement des algorithmes cryptographiques
+Impact:
+Accès non autorisé aux données de la base
+Manipulation des données stockées (lecture, modification, suppression)
+Vol d'informations sensibles stockées sans chiffrement
+Élévation de privilèges potentielle dans l'application
