@@ -62,6 +62,15 @@ L'application utilise des requêtes SQL brutes avec des entrées utilisateur non
 3. Un attaquant peut injecter du code SQL malveillant pour manipuler la base de données
 4. Les données sensibles sont stockées en clair, sans chiffrement, dans la base SQLite
 
+**Exemple vunérable**:
+ Construction de requête non sécurisée : 
+String query = "SELECT * FROM inbox_messages WHERE message_id = '" + messageId + "'";
+database.rawQuery(query, null);
+
+**attaque**:
+SELECT * FROM inbox_messages WHERE message_id = '' OR '1'='1'
+Permet de récupérer tous les messages.
+
 **Fichiers concernés**:
 - `com/pushwoosh/inapp/f/b.java`
 - `com/pushwoosh/inbox/e/b/b.java`
